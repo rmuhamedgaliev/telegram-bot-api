@@ -31,6 +31,6 @@ jobs:
           image: telegram-bot-api
           tags: |
             rmuhamedgaliev/telegram-bot-api:latest
-            rmuhamedgaliev:/telegram-bot-api:${{ env.TG_SERVER_VERSION }}
+            rmuhamedgaliev/telegram-bot-api:${{ env.TG_SERVER_VERSION }}
           containerfiles: ./Containerfile
 
