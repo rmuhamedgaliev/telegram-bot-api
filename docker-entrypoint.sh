@@ -10,7 +10,7 @@ if [ -n "${1}" ]; then
   exec "${*}"
 fi
 
-COMMAND="telegram-bot-api --username=${USERNAME} --groupname=${GROUPNAME} ${BOT_API_ARGS}"
+COMMAND="telegram-bot-api --dir=${TELEGRAM_WORK_DIR} --temp-dir=${TELEGRAM_TEMP_DIR} --username=${USERNAME} --groupname=${GROUPNAME} ${BOT_API_ARGS}"
 
 echo "$COMMAND"
 # shellcheck disable=SC2086
