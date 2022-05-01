@@ -6,10 +6,25 @@ on:
       - master
 
 jobs:
-  chekout:
+  Chekout:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           submodules: 'true'
+      - name: Get version
+        id: current-version
+        run: |
+          TG_SERVER_VERSION=$(cat telegram-bot-api/CMakeLists.txt | grep TelegramBotApi | cut -d " " -f3)
+          echo "TG_SERVER_VERSION=${TG_SERVER_VERSION}" >> $GITHUB_ENV
+          echo "Parsed version: ${TG_SERVER_VERSION}"
+      - name: Build image
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: telegram-bot-api
+          tags: |
+            rmuhamedgaliev/telegram-bot-api:latest
+            rmuhamedgaliev/telegram-bot-api:${{ env.TG_SERVER_VERSION }}
+          containerfiles: ./Containerfile
+
