@@ -6,13 +6,19 @@ on:
       - master
 
 jobs:
-  Chekout:
+  Build-OCI-Image:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           submodules: 'true'
+      - name: Checkout upstream repo
+        uses: actions/checkout@v3
+        with:
+          repository: tdlib/telegram-bot-api
+          path: telegram-bot-api
+          submodules: recursive
       - name: Get version
         id: current-version
         run: |
@@ -25,6 +31,6 @@ jobs:
           image: telegram-bot-api
           tags: |
             rmuhamedgaliev/telegram-bot-api:latest
-            rmuhamedgaliev/telegram-bot-api:${{ env.TG_SERVER_VERSION }}
+            rmuhamedgaliev:/telegram-bot-api:${{ env.TG_SERVER_VERSION }}
           containerfiles: ./Containerfile
 
