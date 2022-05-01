@@ -1,9 +1,11 @@
-name: OCI Image
+name: Build image
 
 on:
   push:
     branches:
       - master
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
   Build-OCI-Image:
